@@ -1,0 +1,149 @@
+In the following steps
+you will create automated tests for a website and perform manual and automated API calls. The
+automation will be part of a simple Java project you will create and eventually submit via a
+public GitHub repository. (If you don’t already have a GitHub account, you will need to create
+one. Don’t worry, it is free!)
+Please note you will collect a key value in the first step. This key is needed as a query
+parameter to make other calls later in the instructions.
+Your key will expire 4 days from the date you received this instruction document. After
+this expiration, you will not be able to submit this code exercise.
+
+Any resemblance to actual people or events is coincidental.
+Instructions:
+1. Make a GET call to the following URL (you may do this in Java or manually using a tool
+like Postman or Insomnia to get the response) with described query parameters:
+https://iezapt5vu6.execute-api.us-east-1.amazonaws.com/test/getkey
+The call requires the following query parameters:
+“firstName” = [your first name as it appears on your application]
+“lastName” = [your last name as it appears on your application]
+2. From the response, save the “api_key” value to use as a query parameter when making
+the POST and PATCH calls that follow and to eventually submit a link to your project.
+3. Create a new Java project to build out your tests. The project will be uploaded to GitHub
+and submitted later.
+
+Web Automation
+For this section, create automated tests in your Java project to cover the following actions.
+1. Navigate to https://automationintesting.online/.
+2. It may not be required, but the top section may need to be cleared by clicking the “Let
+me hack” button.
+3. Navigate down the page to the section for contacting the business.
+4. In the contact form, enter the following data in the associated fields.
+a. Name: Ada Lovelace
+b. Email: ada.lovelace@zeel.com
+
+c. Phone: 347-555-1212
+d. Subject: [a random subject string]
+e. Message: [a random message]
+5. Click the Submit button to submit the form.
+6. Assert the page displays a response with the following information.
+Thanks for getting in touch Ada Lovelace!
+We'll get back to you about
+[your entered subject]
+as soon as possible.
+7. Navigate to the Rooms section.
+8. For a single room, click the “Book this room” button.
+9. Select to book for a single night. (any date)
+10. Enter the following information into the booking form.
+a. First Name: Grace
+b. Last Name: Hopper
+c. Email: grace.hopper@zeel.com
+d. Phone: 347-555-9898
+11. Click the “Book” button.
+12. Assert the page displays a message with the following information.
+Booking Successful!
+Congratulations! Your booking has been confirmed for:
+[beginning date in YYYY-MM-DD format] - [ending date in
+YYYY-MM-DD format]
+13. Click the “Close” button.
+
+API Automation
+1. In your Java project, using REST-assured or similar API testing framework, code a GET
+call to the following URL:
+https://iezapt5vu6.execute-api.us-east-1.amazonaws.com/test/patient
+The call requires the following query parameter:
+“api_key” = [saved api key from the first step 2]
+Collect the response data.
+
+2. In a test, using the response data from the previous step, verify there is at least 1 patient
+with an appointment date in the month of June 2022.
+3. In a test, fail if the following patient does not exist in the response data:
+{
+"id": "SR19760827202206208364",
+"birthdate": "1976-08-27",
+"phone": "347-555-9876",
+"appointment_date": "2022-06-20",
+"name": {
+"lastName": "Rogers",
+"firstName": "Steve"
+},
+"address": {
+"street": "45 W 45th St",
+"city": "New York",
+"state": "NY",
+"zip": "10036"
+}
+}
+
+4. In a test, verify the “id” for all of the patients returned follows the format below:
+[patient first initial] + [patient last initial] + [patient 4
+digit birth year] + [patient 2 digit birth month] + [patient 2
+digit birth day] + [patient 4 digit appointment year] +
+[patient 2 digit appointment month] + [patient 2 digit
+appointment day] + [4 random digits]
+Example ID: AB19800121202206019999
+Example “exploded” ID: A B 1980 01 21 2022 06 01 9999
+5. In a test, create a JSON payload which includes the following updates to the patient data
+for the patient with ID SR19760827202206208364:
+● Updates the patient’s first name to “Tester”
+● Update the last name to “Awesome”
+● Update the single line street address to something different
+● Update the city name to something different
+● Update the state abbreviation to something different
+● Update the 5 digit zip code to something different
+Use the schema below to construct your JSON payload.
+{
+"id": String,
+
+“name”: {
+"firstName": String,
+"lastName": String
+},
+"address": {
+"street": String,
+"city": String,
+"state": String,
+“zip”: String
+}
+}
+
+6. In the test, make a PATCH call to the following URL with the JSON payload from the
+previous step in the body:
+https://iezapt5vu6.execute-api.us-east-1.amazonaws.com/test/update
+The call requires the following query parameter:
+“api_key” = [saved api key from the first step 2]
+Collect the response data.
+7. In your test, assert the following from the update (PATCH) response returned in the
+previous step:
+a. The ID in the response remains unchanged from the original ID
+b. The new first name matches the expected updated name
+c. The new last name matches the expected updated name
+d. The street, city, state, and zip returned match the value submitted during the
+update
+e. The phone, birthdate, and appointment date remain unchanged
+
+Submission
+1. Save your automation project (both web and API) in a public GitHub repository.
+2. To submit your completed project for review, please follow the manual steps below. You
+will only be able to submit once.
+a. Using a manual method, such as using a tool like Insomnia, Postman, or cURL,
+POST a JSON payload matching the schema below to the following URL:
+https://iezapt5vu6.execute-api.us-east-1.amazonaws.com/test/submit
+Use your first name, last name, and the URL to the GitHub repository.
+{
+"firstName": String,
+"lastName": String,
+
+"url": String
+}
+The call requires the following query parameter:
+“api_key” = [saved api key from the first step 2]
