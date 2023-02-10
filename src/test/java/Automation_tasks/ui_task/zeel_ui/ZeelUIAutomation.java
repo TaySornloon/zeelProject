@@ -55,21 +55,20 @@ public class ZeelUIAutomation {
 
            WebElement submitBtn = driver.findElement(By.xpath("//button[@id='submitContact']"));
            submitBtn.click();
+           WebElement test = driver.findElement(By.xpath("//div[@style='height: 412px;']"));
+           String actualMsg = test.getText();
+           String expectedMsg = "Thanks for getting in touch Ada Lovelace!\nWe\'ll get back to you about\nReservation\nas soon as possible.";
+           Assertions.assertEquals(expectedMsg,actualMsg);
+           WebElement bookRoomBtn = driver.findElement(By.xpath("//button[@class='btn btn-outline-primary float-right openBooking']"));
+           bookRoomBtn.click();
 
-        WebElement test = driver.findElement(By.xpath("//div[@style='height: 412px;']"));
-        String actualMsg = test.getText();
-        String expectedMsg = "Thanks for getting in touch Ada Lovelace!\nWe\'ll get back to you about\nReservation\nas soon as possible.";
-        Assertions.assertEquals(expectedMsg,actualMsg);
-        WebElement bookRoomBtn = driver.findElement(By.xpath("//button[@class='btn btn-outline-primary float-right openBooking']"));
-       bookRoomBtn.click();
+           WebElement sourceElement = driver.findElement(By.xpath("(//div[@class='rbc-row-bg'])[4]/div[2]"));
 
-        WebElement sourceElement = driver.findElement(By.xpath("(//div[@class='rbc-row-bg'])[4]/div[2]"));
-
-        WebElement targetElement = driver.findElement(By.xpath("(//div[@class='rbc-row-bg'])[4]/div[3]"));
+           WebElement targetElement = driver.findElement(By.xpath("(//div[@class='rbc-row-bg'])[4]/div[3]"));
            WebElement fromDate = driver.findElement(By.xpath("//button[.='22']"));
            WebElement toDate = driver.findElement(By.xpath("//button[.='23']"));
 
-        WebElement selectMonth = driver.findElement(By.xpath("//span[.='February 2023']"));
+           WebElement selectMonth = driver.findElement(By.xpath("//span[.='February 2023']"));
            String month = selectMonth.getText();
 
 
@@ -87,20 +86,20 @@ public class ZeelUIAutomation {
            WebElement booked = driver.findElement(By.xpath("//button[.='12']"));
            booked.click();
 
-          WebElement roomFirstName = driver.findElement(By.xpath("//input[@class='form-control room-firstname']"));
-          roomFirstName.sendKeys("Grace");
+           WebElement roomFirstName = driver.findElement(By.xpath("//input[@class='form-control room-firstname']"));
+           roomFirstName.sendKeys("Grace");
 
-         WebElement roomLastName = driver.findElement(By.xpath("//input[@class='form-control room-lastname']"));
-         roomLastName.sendKeys("Hopper");
+          WebElement roomLastName = driver.findElement(By.xpath("//input[@class='form-control room-lastname']"));
+          roomLastName.sendKeys("Hopper");
 
-         WebElement email = driver.findElement(By.xpath("//input[@class='form-control room-email']"));
-        email.sendKeys("grace.hopper@zeel.com");
+          WebElement email = driver.findElement(By.xpath("//input[@class='form-control room-email']"));
+          email.sendKeys("grace.hopper@zeel.com");
 
-        WebElement phone = driver.findElement(By.xpath("//input[@class='form-control room-phone']"));
-        phone.sendKeys("347-555-9898");
+          WebElement phone = driver.findElement(By.xpath("//input[@class='form-control room-phone']"));
+          phone.sendKeys("347-555-9898");
 
-        WebElement book = driver.findElement(By.xpath("//button[@class='btn btn-outline-primary float-right book-room']"));
-        book.click();
+          WebElement book = driver.findElement(By.xpath("//button[@class='btn btn-outline-primary float-right book-room']"));
+          book.click();
 
 
     }
