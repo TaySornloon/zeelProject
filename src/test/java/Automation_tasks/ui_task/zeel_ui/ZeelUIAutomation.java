@@ -71,12 +71,24 @@ public class ZeelUIAutomation {
            WebElement selectMonth = driver.findElement(By.xpath("//span[.='February 2023']"));
            String month = selectMonth.getText();
 
+           Point point = sourceElement.getLocation();
+           int xcord = point.getX();
+           int ycord = point.getY();
+
+           Point point2 = targetElement.getLocation();
+           int xcord2 = point2.getX();
+           int ycord2 = point2.getY();
+
+           xcord2 = (xcord2-xcord)+10;
+           ycord2 = (ycord2-ycord)+20;
 
 
            if (month.equals("February 2023")){
                Actions move = new Actions(driver);
                move.moveToElement(fromDate).clickAndHold().moveToElement(toDate).release().perform();
                move.dragAndDrop(sourceElement,targetElement).perform();
+               move.dragAndDropBy(sourceElement,xcord2,ycord2).perform();
+               move.clickAndHold(sourceElement).moveToElement(targetElement,xcord2,ycord2).release().perform();
            }else {
                System.out.println("No month show");
            }
