@@ -62,36 +62,12 @@ public class ZeelUIAutomation {
            WebElement bookRoomBtn = driver.findElement(By.xpath("//button[@class='btn btn-outline-primary float-right openBooking']"));
            bookRoomBtn.click();
 
-           WebElement sourceElement = driver.findElement(By.xpath("(//div[@class='rbc-row-bg'])[4]/div[2]"));
-
-           WebElement targetElement = driver.findElement(By.xpath("(//div[@class='rbc-row-bg'])[4]/div[3]"));
-           WebElement fromDate = driver.findElement(By.xpath("//button[.='22']"));
-           WebElement toDate = driver.findElement(By.xpath("//button[.='23']"));
-
-           WebElement selectMonth = driver.findElement(By.xpath("//span[.='February 2023']"));
-           String month = selectMonth.getText();
-
-           Point point = sourceElement.getLocation();
-           int xcord = point.getX();
-           int ycord = point.getY();
-
-           Point point2 = targetElement.getLocation();
-           int xcord2 = point2.getX();
-           int ycord2 = point2.getY();
-
-           xcord2 = (xcord2-xcord)+10;
-           ycord2 = (ycord2-ycord)+20;
+           WebElement fromDate = driver.findElement(By.xpath("//button[.='17']"));
+           WebElement toDate = driver.findElement(By.xpath("//button[.='18']"));
 
 
-           if (month.equals("February 2023")){
-               Actions move = new Actions(driver);
-               move.moveToElement(fromDate).clickAndHold().moveToElement(toDate).release().perform();
-               move.dragAndDrop(sourceElement,targetElement).perform();
-               move.dragAndDropBy(sourceElement,xcord2,ycord2).perform();
-               move.clickAndHold(sourceElement).moveToElement(targetElement,xcord2,ycord2).release().perform();
-           }else {
-               System.out.println("No month show");
-           }
+           Actions move = new Actions(driver);
+           move.clickAndHold(fromDate).moveByOffset(174,20).release(toDate).perform();
 
            WebElement booked = driver.findElement(By.xpath("//button[.='12']"));
            booked.click();
@@ -111,6 +87,16 @@ public class ZeelUIAutomation {
           WebElement book = driver.findElement(By.xpath("//button[@class='btn btn-outline-primary float-right book-room']"));
           book.click();
 
+          WebElement bookingSuccess = driver.findElement(By.xpath("//div[@class='col-sm-6 text-center']"));
+           String successText = bookingSuccess.getText();
+
+           Assertions.assertEquals(successText,"Booking Successful!\n" +
+                   "Congratulations! Your booking has been confirmed for:\n" +
+                   "2023-02-17 - 2023-02-18");
+
+
+           WebElement closeBtn = driver.findElement(By.xpath("//button[@class='btn btn-outline-primary']"));
+           closeBtn.click();
 
     }
 
