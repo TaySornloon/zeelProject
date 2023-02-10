@@ -73,12 +73,10 @@ public class ZeelUIAutomation {
 
 
 
-
            if (month.equals("February 2023")){
                Actions move = new Actions(driver);
-
                move.moveToElement(fromDate).clickAndHold().moveToElement(toDate).release().perform();
-
+               move.dragAndDrop(sourceElement,targetElement).perform();
            }else {
                System.out.println("No month show");
            }
