@@ -1,4 +1,4 @@
-package Automation_tasks.ui_task.page_class;
+package Automation_tasks.ui_task.zeel_ui;
 
 import java.awt.*;
 

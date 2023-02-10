@@ -34,6 +34,7 @@ digit birth day] + [patient 4 digit appointment year] +
 appointment day] + [4 random digits]
 Example ID: AB19800121202206019999
 Example “exploded” ID: A B 1980 01 21 2022 06 01 9999
+
 5. In a test, create a JSON payload which includes the following updates to the patient data
 for the patient with ID SR19760827202206208364:
 ● Updates the patient’s first name to “Tester”
